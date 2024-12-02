@@ -14,7 +14,7 @@ import retrofit2.HttpException
 
 class Repository private constructor(
     private val apiService: ApiService
-){
+) {
 
     suspend fun login(email: String, password: String): Result<LoginResponse> {
         return withContext(Dispatchers.IO) {
@@ -107,6 +107,7 @@ class Repository private constructor(
             }
         }
     }
+
     companion object {
         @Volatile
         private var INSTANCE: Repository? = null
