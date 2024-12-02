@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.khrlanamm.dicodingtales.HomeFragment"
+        android:name="com.khrlanamm.dicodingtales.ui.home.HomeFragment"
         android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/DetailFragment"
-        android:name="com.khrlanamm.dicodingtales.DetailFragment"
+        android:name="com.khrlanamm.dicodingtales.ui.detail.DetailFragment"
         android:label="@string/detail_fragment_label"
         tools:layout="@layout/fragment_detail">
 
