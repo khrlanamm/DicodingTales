@@ -7,4 +7,7 @@
     <string name="detail_fragment_label">Fragment Detail</string>
     <string name="next">Berikutnya</string>
     <string name="previous">Sebelumnya</string>
+
+    <string name="splash">Selamat Datang, </string>
+    <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>
 </resources>

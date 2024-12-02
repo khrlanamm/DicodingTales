@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".ui.auth.splash.SplashActivity">
+
+    <TextView
+        android:id="@+id/txt_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0"
+        android:text="@string/splash"
+        android:textColor="@color/black"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        tools:alpha="100" />
+
+    <ImageView
+        android:id="@+id/img_identity"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_gravity="start"
+        android:layout_margin="8dp"
+        android:contentDescription="@string/splash"
+        android:src="@drawable/identity"
+        android:alpha="0"
+        tools:alpha="100" />
+
+    <ImageView
+        android:id="@+id/img_splash"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:src="@drawable/vintage01"
+        android:layout_margin="8dp"
+        android:alpha="0"
+        tools:alpha="100"
+        android:contentDescription="@string/splash" />
+
+    <TextView
+        android:id="@+id/txt_desc_splash"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        android:alpha="0"
+        android:gravity="center"
+        android:text="@string/description_splash"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        tools:alpha="100" />
+</LinearLayout>

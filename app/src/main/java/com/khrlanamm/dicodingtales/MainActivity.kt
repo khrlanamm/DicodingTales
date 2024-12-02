@@ -14,12 +14,17 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.databinding.ActivityMainBinding
+import com.khrlanamm.dicodingtales.ui.auth.splash.SplashActivity
 
 class MainActivity : AppCompatActivity() {
     private var show = false
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +37,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sessionManager = SessionManager(this)
+
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             setDisplayShowTitleEnabled(false)
             setLogo(R.drawable.header_logo)
             setDisplayUseLogoEnabled(true)
         }
+
+        checkAuthentication()
+
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
@@ -48,6 +58,21 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
         }
+    }
+
+    private fun checkAuthentication() {
+        val token = sessionManager.getAuthToken()
+        if (token == null) {
+            navigateToLogin()
+        } else {
+            true
+        }
+    }
+
+    private fun navigateToLogin() {
+        val intent = Intent(this, SplashActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
