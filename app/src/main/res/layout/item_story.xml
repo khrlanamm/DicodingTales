@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     app:cardElevation="4dp"
     app:cardCornerRadius="8dp">
@@ -17,20 +17,45 @@
         <ImageView
             android:id="@+id/iv_item_photo"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/image_story"
             android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars"
-            android:contentDescription="@string/image_story" />
+            tools:src="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/name_story"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_item_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date_story"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_item_name"
+            android:id="@+id/tv_item_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_story"
-            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:text="@string/desc_story"
+            android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp" />
-
+            android:maxLines="2"
+            android:ellipsize="end" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

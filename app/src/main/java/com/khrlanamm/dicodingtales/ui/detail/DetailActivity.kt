@@ -11,9 +11,13 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.khrlanamm.dicodingtales.R
 import com.khrlanamm.dicodingtales.data.Result
+import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.data.remote.response.Story
 import com.khrlanamm.dicodingtales.databinding.ActivityDetailBinding
-import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+import java.util.TimeZone
 
 class DetailActivity : AppCompatActivity() {
 
@@ -66,6 +70,7 @@ class DetailActivity : AppCompatActivity() {
             val story = data.data
             binding.nameDetail.text = story.name
             binding.descDetail.text = story.description
+            binding.dateDetail.text = formatDate(story.createdAt)
 
             Glide.with(this)
                 .load(story.photoUrl)
@@ -77,5 +82,34 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun formatDate(dateString: String): String {
+        return try {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+            val date = inputFormat.parse(dateString)
+
+            val isIndonesian = Locale.getDefault().language == "in"
+
+            if (date != null) {
+                if (isIndonesian) {
+                    val calendar = Calendar.getInstance()
+                    calendar.time = date
+
+                    val outputFormat = SimpleDateFormat("d MMM yyyy HH:mm", Locale("in", "ID"))
+                    "${outputFormat.format(calendar.time)} WIB"
+                } else {
+                    val outputFormat = SimpleDateFormat("d MMM yyyy HH:mm", Locale.getDefault())
+                    outputFormat.timeZone = TimeZone.getTimeZone("UTC")
+                    "${outputFormat.format(date)} UTC"
+                }
+            } else {
+                dateString
+            }
+        } catch (e: Exception) {
+            dateString
+        }
     }
 }

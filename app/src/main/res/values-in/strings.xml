@@ -38,7 +38,9 @@
 
     <string name="image_story">Gambar Kisah</string>
     <string name="title_story">Judul Judul Judul</string>
-    <string name="caption_story">Deskripsi Deskripsi Deskripsi Deskripsi</string>
+    <string name="desc_story">Deskripsi Deskripsi Deskripsi Deskripsi</string>
+    <string name="date_story">24 Nov 2024</string>
+    <string name="name_story">Khoirul Anam</string>
 
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>
