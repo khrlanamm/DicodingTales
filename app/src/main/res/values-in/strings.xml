@@ -24,6 +24,11 @@
     <string name="empty_email">Email wajib diisi</string>
     <string name="empty_password">Kata sandi wajib di isi</string>
 
+    <string name="confirm_logout">Keluar Akun</string>
+    <string name="confirm_logout_detail">Apakah anda yakin mau keluar dari akun?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Batal</string>
+
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>
 </resources>

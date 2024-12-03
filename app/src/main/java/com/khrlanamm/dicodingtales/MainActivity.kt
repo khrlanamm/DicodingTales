@@ -13,6 +13,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -48,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         checkAuthentication()
 
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -63,13 +63,13 @@ class MainActivity : AppCompatActivity() {
     private fun checkAuthentication() {
         val token = sessionManager.getAuthToken()
         if (token == null) {
-            navigateToLogin()
+            navigateToSplash()
         } else {
             true
         }
     }
 
-    private fun navigateToLogin() {
+    private fun navigateToSplash() {
         val intent = Intent(this, SplashActivity::class.java)
         startActivity(intent)
         finish()
@@ -82,17 +82,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_logout -> true
+            R.id.action_logout -> {
+                showLogoutConfirmation()
+                true
+            }
             R.id.action_language -> {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+    private fun showLogoutConfirmation() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.confirm_logout))
+            .setMessage(getString(R.string.confirm_logout_detail))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
+                logout()
+                dialog.dismiss()
+            }
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun logout() {
+        sessionManager.clearAuthToken()
+        navigateToSplash()
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -11,6 +11,8 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.khrlanamm.dicodingtales.R
 import com.khrlanamm.dicodingtales.ui.auth.helper.AuthAdapter
+import com.khrlanamm.dicodingtales.ui.auth.login.LoginFragment
+import com.khrlanamm.dicodingtales.ui.auth.register.RegisterFragment
 
 class AuthActivity : AppCompatActivity() {
     private lateinit var tabLayout: TabLayout
@@ -36,8 +38,8 @@ class AuthActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Login"
-                1 -> "Register"
+                0 -> getString(R.string.btn_login)
+                1 -> getString(R.string.btn_register)
                 else -> ""
             }
         }.attach()
@@ -52,5 +54,27 @@ class AuthActivity : AppCompatActivity() {
             .setDuration(1000)
             .setStartDelay(400)
             .start()
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.let {
+                    val position = tab.position
+                    if (position == 0) {
+                        val fragment = supportFragmentManager.findFragmentByTag("f0")
+                        if (fragment is LoginFragment) {
+                            fragment.onViewCreated(fragment.requireView(), null)
+                        }
+                    } else if (position == 1) {
+                        val fragment = supportFragmentManager.findFragmentByTag("f1")
+                        if (fragment is RegisterFragment) {
+                            fragment.onViewCreated(fragment.requireView(), null)
+                        }
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
     }
 }
