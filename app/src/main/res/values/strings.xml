@@ -35,6 +35,9 @@
     <string name="welcome">Welcome, %1$s</string>
     <string name="login_success">Login success, enjoy your time here.</string>
 
+    <string name="welcome_register">Hi, %1$s</string>
+    <string name="register_success">Your account succesfully registered, please login!</string>
+
     <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

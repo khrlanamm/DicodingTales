@@ -33,6 +33,9 @@
     <string name="welcome">Selamat Datang, %1$s</string>
     <string name="login_success">Anda berhasil login ke aplikasi.</string>
 
+    <string name="welcome_register">Halo, %1$s</string>
+    <string name="register_success">Akun anda telah berhasil dibuat, silahkan masuk ke akun.</string>
+
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>
 </resources>

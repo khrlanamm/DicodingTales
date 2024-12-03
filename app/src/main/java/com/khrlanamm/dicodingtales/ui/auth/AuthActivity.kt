@@ -77,4 +77,9 @@ class AuthActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
     }
+
+    // Add this getter method
+    fun getViewPager(): ViewPager2 {
+        return viewPager
+    }
 }
