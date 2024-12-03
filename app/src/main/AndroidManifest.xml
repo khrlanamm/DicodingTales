@@ -15,10 +15,13 @@
         android:theme="@style/Theme.DicodingTales"
         tools:targetApi="31">
         <activity
-            android:name=".ui.auth.AuthActivity"
-            android:resizeableActivity="true"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".ui.detail.DetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:exported="false"
+            android:resizeableActivity="true"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.auth.splash.SplashActivity"
             android:exported="false" />

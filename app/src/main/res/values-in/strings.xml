@@ -37,7 +37,8 @@
     <string name="register_success">Akun anda telah berhasil dibuat, silahkan masuk ke akun.</string>
 
     <string name="image_story">Gambar Kisah</string>
-    <string name="caption_story">Judul Judul Judul</string>
+    <string name="title_story">Judul Judul Judul</string>
+    <string name="caption_story">Deskripsi Deskripsi Deskripsi Deskripsi</string>
 
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>

@@ -39,7 +39,8 @@
     <string name="register_success">Your account succesfully registered, please login!</string>
 
     <string name="image_story">Image Story</string>
-    <string name="caption_story">Caption Caption</string>
+    <string name="title_story">Title Title Title</string>
+    <string name="caption_story">Caption Caption Caption Caption</string>
 
 
     <string name="lorem_ipsum" translatable="false">

@@ -2,39 +2,35 @@ package com.khrlanamm.dicodingtales
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.Settings
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.khrlanamm.dicodingtales.data.Result
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.databinding.ActivityMainBinding
 import com.khrlanamm.dicodingtales.ui.auth.splash.SplashActivity
+import com.khrlanamm.dicodingtales.ui.detail.DetailActivity
 
 class MainActivity : AppCompatActivity() {
-    private var show = false
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var sessionManager: SessionManager
+    private lateinit var adapter: HomeAdapter
+    private val homeViewModel: HomeViewModel by viewModels {
+        HomeFactory.getInstance(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        installSplashScreen().setKeepOnScreenCondition { show }
-        Handler(Looper.getMainLooper()).postDelayed({
-            show = false
-        }, 5000)
-
+        installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -47,16 +43,26 @@ class MainActivity : AppCompatActivity() {
             setDisplayUseLogoEnabled(true)
         }
 
+        setupRecyclerView()
         checkAuthentication()
+        observeViewModel()
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.fab.setOnClickListener {
+            Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+    }
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+    private fun setupRecyclerView() {
+        adapter = HomeAdapter { story ->
+            val intent = Intent(this, DetailActivity::class.java).apply {
+                putExtra("STORY_ID", story.id)
+            }
+            startActivity(intent)
+        }
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = this@MainActivity.adapter
         }
     }
 
@@ -65,8 +71,32 @@ class MainActivity : AppCompatActivity() {
         if (token == null) {
             navigateToSplash()
         } else {
-            true
+            homeViewModel.getAllStories(token)
         }
+    }
+
+    private fun observeViewModel() {
+        homeViewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
+        }
+
+        homeViewModel.stories.observe(this) { result ->
+            when (result) {
+                is Result.Loading -> showLoading(true)
+                is Result.Success -> {
+                    showLoading(false)
+                    adapter.submitList(result.data)
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun navigateToSplash() {
@@ -76,7 +106,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
@@ -94,6 +123,7 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     private fun showLogoutConfirmation() {
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.confirm_logout))
@@ -111,11 +141,5 @@ class MainActivity : AppCompatActivity() {
     private fun logout() {
         sessionManager.clearAuthToken()
         navigateToSplash()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 }
