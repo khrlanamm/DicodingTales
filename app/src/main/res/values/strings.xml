@@ -44,6 +44,14 @@
     <string name="date_story">24 Nov 2024</string>
     <string name="name_story">Khoirul Anam</string>
 
+    <string name="add_story">Post Story</string>
+    <string name="upload">Upload</string>
+    <string name="description">Description</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="no_media_selected">No media selected</string>
+    <string name="please_add_description">Please add description</string>
+    <string name="please_upload_an_image">Please upload an image</string>
 
     <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

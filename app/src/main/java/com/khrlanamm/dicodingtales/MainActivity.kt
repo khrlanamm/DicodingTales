@@ -18,6 +18,7 @@ import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.databinding.ActivityMainBinding
 import com.khrlanamm.dicodingtales.ui.auth.splash.SplashActivity
 import com.khrlanamm.dicodingtales.ui.detail.DetailActivity
+import com.khrlanamm.dicodingtales.ui.upload.UploadActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -48,9 +49,10 @@ class MainActivity : AppCompatActivity() {
         observeViewModel()
 
         binding.fab.setOnClickListener {
-            Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val intent = Intent(this@MainActivity, UploadActivity::class.java)
+            startActivity(intent)
         }
+
     }
 
     private fun setupRecyclerView() {

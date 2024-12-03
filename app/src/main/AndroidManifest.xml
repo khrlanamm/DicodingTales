@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DicodingTales"
         tools:targetApi="31">
         <activity
+            android:name=".ui.upload.UploadActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.DetailActivity"
             android:exported="false" />
         <activity
