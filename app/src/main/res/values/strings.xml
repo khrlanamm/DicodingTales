@@ -10,6 +10,22 @@
     <string name="splash">Welcome to, </string>
     <string name="description_splash">Capture your beautiful memories and share it with the world!</string>
 
+    <string name="email">Email</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="password">Password</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="btn_login">Login</string>
+
+    <string name="name">Name</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="register">Register</string>
+
+    <string name="password_validation">Password must be more than 8 characters</string>
+    <string name="email_validation">Invalid email format</string>
+    <string name="empty_name">Name cannot be empty</string>
+    <string name="empty_email">Email cannot be empty</string>
+    <string name="empty_password">Password cannot be empty</string>
+
     <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
