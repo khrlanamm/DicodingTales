@@ -55,6 +55,11 @@
     <string name="please_add_description">Please add description</string>
     <string name="please_upload_an_image">Please upload an image</string>
 
+    <string name="appwidget_text">STORY BANNER</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">Stack Widget For World's Stories</string>
+
     <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
@@ -91,4 +96,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+
+
 </resources>

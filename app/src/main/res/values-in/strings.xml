@@ -53,6 +53,11 @@
     <string name="please_add_description">Tambahkan deskripsi</string>
     <string name="please_upload_an_image">Unggah sebuah gambar</string>
 
+    <string name="appwidget_text">BANNER KISAH</string>
+    <string name="empty_text">TIDAK ADA DATA</string>
+    <string name="add_widget">Tambahkan widget</string>
+    <string name="app_widget_description">Stack Widget Untuk Kisah Dunia</string>
+
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>
 </resources>
