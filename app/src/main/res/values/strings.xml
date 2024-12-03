@@ -29,7 +29,11 @@
     <string name="confirm_logout">Confirm Logout</string>
     <string name="confirm_logout_detail">Are you sure you want to logout?</string>
     <string name="yes">Yes</string>
+    <string name="ok">OK</string>
     <string name="no">No</string>
+
+    <string name="welcome">Welcome, %1$s</string>
+    <string name="login_success">Login success, enjoy your time here.</string>
 
     <string name="lorem_ipsum" translatable="false">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

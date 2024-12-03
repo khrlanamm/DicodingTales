@@ -27,7 +27,11 @@
     <string name="confirm_logout">Keluar Akun</string>
     <string name="confirm_logout_detail">Apakah anda yakin mau keluar dari akun?</string>
     <string name="yes">Ya</string>
+    <string name="ok">OK</string>
     <string name="no">Batal</string>
+
+    <string name="welcome">Selamat Datang, %1$s</string>
+    <string name="login_success">Anda berhasil login ke aplikasi.</string>
 
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>

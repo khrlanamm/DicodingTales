@@ -72,12 +72,11 @@ class LoginFragment : Fragment() {
                 is Result.Success -> {
                     showLoading(false)
                     val token = result.data.loginResult.token
+                    val name = result.data.loginResult.name
                     lifecycleScope.launch {
                         sessionManager.saveAuthToken(token)
                     }
-                    Toast.makeText(requireContext(), result.data.message, Toast.LENGTH_SHORT).show()
-
-                    navigateToMainActivity()
+                    showWelcomeDialog(name)
                 }
 
                 is Result.Error -> {
@@ -88,11 +87,27 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun showWelcomeDialog(name: String) {
+        val dialog = android.app.AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.welcome, name))
+            .setMessage(getString(R.string.login_success))
+            .setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        dialog.setOnDismissListener {
+            navigateToMainActivity()
+        }
+        dialog.show()
+    }
+
     private fun navigateToMainActivity() {
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
         activity?.finish()
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
