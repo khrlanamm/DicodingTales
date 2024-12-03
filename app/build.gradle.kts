@@ -64,10 +64,11 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0") // Legacy Support Library v4
     implementation("androidx.fragment:fragment-ktx:1.8.5") // Fragment KTX
 
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
