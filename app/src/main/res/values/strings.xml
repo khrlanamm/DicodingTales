@@ -45,6 +45,8 @@
     <string name="name_story">Khoirul Anam</string>
 
     <string name="add_story">Post Story</string>
+    <string name="upload_title">Upload Story</string>
+    <string name="upload_title_big">Post Your Moment</string>
     <string name="upload">Upload</string>
     <string name="description">Description</string>
     <string name="camera">Camera</string>

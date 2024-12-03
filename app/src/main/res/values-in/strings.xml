@@ -43,6 +43,8 @@
     <string name="name_story">Khoirul Anam</string>
 
     <string name="add_story">Unggah Kisah</string>
+    <string name="upload_title">Unggah Kisah</string>
+    <string name="upload_title_big">Bagikan Momen Anda</string>
     <string name="description">Deskripsi</string>
     <string name="upload">Unggah</string>
     <string name="camera">Kamera</string>
