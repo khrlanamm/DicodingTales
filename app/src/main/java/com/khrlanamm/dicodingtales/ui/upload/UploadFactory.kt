@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.khrlanamm.dicodingtales.data.Repository
 import com.khrlanamm.dicodingtales.di.Injection
 
-class UploadFactory(private val repository: Repository): ViewModelProvider.NewInstanceFactory() {
+class UploadFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UploadViewModel::class.java)) {

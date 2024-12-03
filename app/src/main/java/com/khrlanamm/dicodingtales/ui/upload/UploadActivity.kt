@@ -12,11 +12,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.khrlanamm.dicodingtales.MainActivity
 import com.khrlanamm.dicodingtales.R
 import com.khrlanamm.dicodingtales.data.Result
-import com.khrlanamm.dicodingtales.databinding.ActivityUploadBinding
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
-import com.khrlanamm.dicodingtales.MainActivity
+import com.khrlanamm.dicodingtales.databinding.ActivityUploadBinding
 import com.khrlanamm.dicodingtales.utils.getImageUri
 import com.khrlanamm.dicodingtales.utils.reduceFileImage
 import com.khrlanamm.dicodingtales.utils.uriToFile
@@ -64,10 +64,11 @@ class UploadActivity : AppCompatActivity() {
             showLoading(isLoading)
         }
         viewModel.uploadResult.observe(this) { result ->
-            when(result) {
+            when (result) {
                 is Result.Loading -> {
                     showLoading(true)
                 }
+
                 is Result.Success -> {
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
 
@@ -75,6 +76,7 @@ class UploadActivity : AppCompatActivity() {
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                 }
+
                 is Result.Error -> {
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                 }
@@ -82,19 +84,23 @@ class UploadActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
+
     private fun uploadImage(token: String) {
         val description = binding.edAddDescription.text.toString().trim()
 
         if (description.isEmpty()) {
-            Toast.makeText(this, getString(R.string.please_add_description), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.please_add_description), Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
         if (currentImageUri == null) {
-            Toast.makeText(this, getString(R.string.please_upload_an_image), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.please_upload_an_image), Toast.LENGTH_SHORT)
+                .show()
             return
         }
 
@@ -122,6 +128,7 @@ class UploadActivity : AppCompatActivity() {
     private fun startGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
+
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
@@ -137,6 +144,7 @@ class UploadActivity : AppCompatActivity() {
         currentImageUri = getImageUri(this)
         launcherIntentCamera.launch(currentImageUri!!)
     }
+
     private val launcherIntentCamera = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { isSuccess ->

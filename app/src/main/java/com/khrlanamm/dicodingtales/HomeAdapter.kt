@@ -13,9 +13,11 @@ import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 
-class HomeAdapter(private val onItemClick: (ListStoryItem) -> Unit) : ListAdapter<ListStoryItem, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
+class HomeAdapter(private val onItemClick: (ListStoryItem) -> Unit) :
+    ListAdapter<ListStoryItem, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
 
-    inner class HomeViewHolder(private val binding: ItemStoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class HomeViewHolder(private val binding: ItemStoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(story: ListStoryItem) {
             binding.tvItemName.text = story.name
             binding.tvItemDesc.text = story.description
@@ -47,7 +49,10 @@ class HomeAdapter(private val onItemClick: (ListStoryItem) -> Unit) : ListAdapte
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+            override fun areContentsTheSame(
+                oldItem: ListStoryItem,
+                newItem: ListStoryItem
+            ): Boolean {
                 return oldItem == newItem
             }
         }

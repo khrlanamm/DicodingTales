@@ -12,7 +12,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.khrlanamm.dicodingtales.data.Result
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.databinding.ActivityMainBinding
@@ -89,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                     showLoading(false)
                     adapter.submitList(result.data)
                 }
+
                 is Result.Error -> {
                     showLoading(false)
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
@@ -118,10 +118,12 @@ class MainActivity : AppCompatActivity() {
                 showLogoutConfirmation()
                 true
             }
+
             R.id.action_language -> {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
