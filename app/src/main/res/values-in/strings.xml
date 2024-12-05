@@ -3,10 +3,6 @@
     <string name="app_name">Kisah Dicoding</string>
     <string name="action_language">Bahasa</string>
     <string name="action_logout">Keluar</string>
-    <string name="home_fragment_label">Fragment Beranda</string>
-    <string name="detail_fragment_label">Fragment Detail</string>
-    <string name="next">Berikutnya</string>
-    <string name="previous">Sebelumnya</string>
 
     <string name="email">Surel</string>
     <string name="hint_email">Masukkan surel anda</string>
@@ -37,12 +33,10 @@
     <string name="register_success">Akun anda telah berhasil dibuat, silahkan masuk ke akun.</string>
 
     <string name="image_story">Gambar Kisah</string>
-    <string name="title_story">Judul Judul Judul</string>
     <string name="desc_story">Deskripsi Deskripsi Deskripsi Deskripsi</string>
     <string name="date_story">24 Nov 2024</string>
     <string name="name_story">Khoirul Anam</string>
 
-    <string name="add_story">Unggah Kisah</string>
     <string name="upload_title">Unggah Kisah</string>
     <string name="upload_title_big">Bagikan Momen Anda</string>
     <string name="description">Deskripsi</string>
@@ -55,4 +49,6 @@
 
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>
+
+    <string name="image_placeholder">Ini adalah sebuah gambar</string>
 </resources>

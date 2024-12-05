@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.khrlanamm.dicodingtales.data.Result
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.databinding.ActivityMainBinding
-import com.khrlanamm.dicodingtales.ui.auth.splash.SplashActivity
+import com.khrlanamm.dicodingtales.ui.auth.onboarding.OnboardingActivity
 import com.khrlanamm.dicodingtales.ui.detail.DetailActivity
 import com.khrlanamm.dicodingtales.ui.upload.UploadActivity
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     private lateinit var adapter: HomeAdapter
     private val homeViewModel: HomeViewModel by viewModels {
-        HomeFactory.getInstance(this)
+        HomeFactory.getInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     private fun checkAuthentication() {
         val token = sessionManager.getAuthToken()
         if (token == null) {
-            navigateToSplash()
+            navigateToOnboarding()
         } else {
             homeViewModel.getAllStories(token)
         }
@@ -101,8 +101,8 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun navigateToSplash() {
-        val intent = Intent(this, SplashActivity::class.java)
+    private fun navigateToOnboarding() {
+        val intent = Intent(this, OnboardingActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -144,6 +144,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun logout() {
         sessionManager.clearAuthToken()
-        navigateToSplash()
+        navigateToOnboarding()
     }
 }

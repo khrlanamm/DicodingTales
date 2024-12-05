@@ -1,6 +1,5 @@
 package com.khrlanamm.dicodingtales
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.khrlanamm.dicodingtales.data.Repository
@@ -18,10 +17,10 @@ class HomeFactory(private val repository: Repository) : ViewModelProvider.NewIns
     companion object {
         @Volatile
         private var INSTANCE: HomeFactory? = null
-        fun getInstance(context: Context): HomeFactory =
+        fun getInstance(): HomeFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: HomeFactory(
-                    Injection.repository(context)
+                    Injection.repository()
                 )
             }.also { INSTANCE = it }
     }

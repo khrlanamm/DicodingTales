@@ -1,6 +1,5 @@
 package com.khrlanamm.dicodingtales.ui.detail
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.khrlanamm.dicodingtales.data.Repository
@@ -18,10 +17,10 @@ class DetailFactory(private val repository: Repository) : ViewModelProvider.NewI
     companion object {
         @Volatile
         private var INSTANCE: DetailFactory? = null
-        fun getInstance(context: Context): DetailFactory =
+        fun getInstance(): DetailFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: DetailFactory(
-                    Injection.repository(context)
+                    Injection.repository()
                 )
             }.also { INSTANCE = it }
     }
