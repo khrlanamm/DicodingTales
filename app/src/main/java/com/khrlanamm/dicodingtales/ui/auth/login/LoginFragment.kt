@@ -129,17 +129,18 @@ class LoginFragment : Fragment() {
 
     private fun setupFadeIn() {
         with(binding) {
-            emailTextView.setupFadeIn(1000, 0)
-            edLoginEmail.setupFadeIn(1000, 200)
-            emailEditTextLayout.setupFadeIn(1000, 200)
-            edLoginPassword.setupFadeIn(1000, 400)
-            passwordTextView.setupFadeIn(1000, 400)
-            PasswordEditTextLayout.setupFadeIn(1000, 600)
-            btnLogin.setupFadeIn(1000, 800)
+            emailTextView.setupFadeIn(0)
+            edLoginEmail.setupFadeIn(200)
+            emailEditTextLayout.setupFadeIn(200)
+            edLoginPassword.setupFadeIn(400)
+            passwordTextView.setupFadeIn(400)
+            PasswordEditTextLayout.setupFadeIn(600)
+            btnLogin.setupFadeIn(800)
         }
     }
 
-    private fun View.setupFadeIn(duration: Long, startDelay: Long = 0L) {
+    private fun View.setupFadeIn(startDelay: Long = 0L) {
+        val duration = 1000L
         this.alpha = 0f
         this.animate().alpha(1f).setDuration(duration).setStartDelay(startDelay).start()
     }

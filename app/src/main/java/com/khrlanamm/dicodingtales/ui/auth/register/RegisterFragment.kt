@@ -22,7 +22,8 @@ class RegisterFragment : Fragment() {
 
     private var isRegistered = false
 
-    private fun View.setupFadeIn(duration: Long, startDelay: Long = 0L) {
+    private fun View.setupFadeIn(startDelay: Long = 0L) {
+        val duration = 1000L
         this.alpha = 0f
         this.animate().alpha(1f).setDuration(duration).setStartDelay(startDelay).start()
     }
@@ -39,17 +40,17 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            nameTextView.setupFadeIn(1000, 0)
-            nameEditTextLayout.setupFadeIn(1000, 200)
-            edRegisterName.setupFadeIn(1000, 200)
-            emailTextView.setupFadeIn(1000, 400)
-            emailEditTextLayout.setupFadeIn(1000, 600)
-            edRegisterEmail.setupFadeIn(1000, 600)
-            progressBar.setupFadeIn(1000, 800)
-            txtPassword.setupFadeIn(1000, 1000)
-            passwordEditTextLayout.setupFadeIn(1000, 1200)
-            edRegisterPassword.setupFadeIn(1000, 1200)
-            btnRegister.setupFadeIn(1000, 1400)
+            nameTextView.setupFadeIn(0)
+            nameEditTextLayout.setupFadeIn(200)
+            edRegisterName.setupFadeIn(200)
+            emailTextView.setupFadeIn(400)
+            emailEditTextLayout.setupFadeIn(600)
+            edRegisterEmail.setupFadeIn(600)
+            progressBar.setupFadeIn(800)
+            txtPassword.setupFadeIn(1000)
+            passwordEditTextLayout.setupFadeIn(1200)
+            edRegisterPassword.setupFadeIn(1200)
+            btnRegister.setupFadeIn(1400)
         }
 
         binding.btnRegister.setOnClickListener {
