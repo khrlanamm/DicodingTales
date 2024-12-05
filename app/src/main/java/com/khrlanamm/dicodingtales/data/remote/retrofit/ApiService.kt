@@ -1,10 +1,10 @@
 package com.khrlanamm.dicodingtales.data.remote.retrofit
 
-import com.khrlanamm.dicodingtales.data.remote.response.UploadResponse
 import com.khrlanamm.dicodingtales.data.remote.response.DetailResponse
 import com.khrlanamm.dicodingtales.data.remote.response.LoginResponse
-import com.khrlanamm.dicodingtales.data.remote.response.StoryResponse
 import com.khrlanamm.dicodingtales.data.remote.response.RegisterResponse
+import com.khrlanamm.dicodingtales.data.remote.response.StoryResponse
+import com.khrlanamm.dicodingtales.data.remote.response.UploadResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*

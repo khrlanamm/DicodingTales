@@ -78,7 +78,6 @@ class AuthActivity : AppCompatActivity() {
         })
     }
 
-    // Add this getter method
     fun getViewPager(): ViewPager2 {
         return viewPager
     }
