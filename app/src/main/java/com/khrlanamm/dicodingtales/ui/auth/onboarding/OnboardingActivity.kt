@@ -32,11 +32,10 @@ class OnboardingActivity : AppCompatActivity() {
             val intent = Intent(this@OnboardingActivity, AuthActivity::class.java)
             startActivity(intent)
             finish()
-        }, 7000)
+        }, ONBOARDING_DELAY_MILLIS)
     }
 
     private fun playAnimation() {
-
         val title = ObjectAnimator.ofFloat(binding.txtSplash, View.ALPHA, 1f).setDuration(1000)
         val identity = ObjectAnimator.ofFloat(binding.imgIdentity, View.ALPHA, 1f).setDuration(1000)
         val img = ObjectAnimator.ofFloat(binding.imgSplash, View.ALPHA, 1f).setDuration(1000)
@@ -47,6 +46,7 @@ class OnboardingActivity : AppCompatActivity() {
             start()
         }
     }
-
-
+    companion object {
+        private const val ONBOARDING_DELAY_MILLIS: Long = 7000L
+    }
 }

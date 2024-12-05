@@ -17,11 +17,6 @@ import com.khrlanamm.dicodingtales.databinding.FragmentLoginBinding
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
-
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -133,13 +128,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupFadeIn() {
-        binding.emailTextView.setupFadeIn(1000, 0)
-        binding.edLoginEmail.setupFadeIn(1000, 200)
-        binding.emailEditTextLayout.setupFadeIn(1000, 200)
-        binding.edLoginPassword.setupFadeIn(1000, 400)
-        binding.passwordTextView.setupFadeIn(1000, 400)
-        binding.PasswordEditTextLayout.setupFadeIn(1000, 600)
-        binding.btnLogin.setupFadeIn(1000, 800)
+        with(binding) {
+            emailTextView.setupFadeIn(1000, 0)
+            edLoginEmail.setupFadeIn(1000, 200)
+            emailEditTextLayout.setupFadeIn(1000, 200)
+            edLoginPassword.setupFadeIn(1000, 400)
+            passwordTextView.setupFadeIn(1000, 400)
+            PasswordEditTextLayout.setupFadeIn(1000, 600)
+            btnLogin.setupFadeIn(1000, 800)
+        }
     }
 
     private fun View.setupFadeIn(duration: Long, startDelay: Long = 0L) {
@@ -150,5 +147,9 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        fun newInstance() = LoginFragment()
     }
 }

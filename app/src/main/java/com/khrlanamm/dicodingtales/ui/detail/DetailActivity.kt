@@ -20,7 +20,6 @@ import java.util.Locale
 import java.util.TimeZone
 
 class DetailActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityDetailBinding
     private lateinit var sessionManager: SessionManager
     private val detailViewModel: DetailViewModel by viewModels {
@@ -47,7 +46,7 @@ class DetailActivity : AppCompatActivity() {
             insets
         }
 
-        val storyId = intent.getStringExtra("STORY_ID")
+        val storyId = intent.getStringExtra(STORY_ID)
         val token = sessionManager.getAuthToken()
 
         if (token != null && storyId != null) {
@@ -109,8 +108,12 @@ class DetailActivity : AppCompatActivity() {
             } else {
                 dateString
             }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             dateString
         }
+    }
+
+    companion object {
+        const val STORY_ID = "STORY_ID"
     }
 }
