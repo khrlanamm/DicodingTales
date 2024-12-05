@@ -26,7 +26,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: LoginViewModel by viewModels {
-        LoginFactory.getInstance(requireContext())
+        LoginFactory.getInstance()
     }
 
     private lateinit var sessionManager: SessionManager
