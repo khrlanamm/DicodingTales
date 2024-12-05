@@ -8,9 +8,9 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewParent
-import com.khrlanamm.dicodingtales.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.khrlanamm.dicodingtales.R
 
 class EmailEditText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

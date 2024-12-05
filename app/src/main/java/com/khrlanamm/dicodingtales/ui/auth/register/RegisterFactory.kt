@@ -1,6 +1,5 @@
 package com.khrlanamm.dicodingtales.ui.auth.register
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.khrlanamm.dicodingtales.data.Repository
@@ -18,10 +17,10 @@ class RegisterFactory(private val repository: Repository) : ViewModelProvider.Ne
     companion object {
         @Volatile
         private var INSTANCE: RegisterFactory? = null
-        fun getInstance(context: Context): RegisterFactory =
+        fun getInstance(): RegisterFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: RegisterFactory(
-                    Injection.repository(context)
+                    Injection.repository()
                 )
             }.also { INSTANCE = it }
     }

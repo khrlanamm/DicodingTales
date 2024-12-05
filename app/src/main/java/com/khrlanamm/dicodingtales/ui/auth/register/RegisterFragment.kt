@@ -22,7 +22,7 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: RegisterViewModel by viewModels {
-        RegisterFactory.getInstance(requireContext())
+        RegisterFactory.getInstance()
     }
 
     private var isRegistered = false
