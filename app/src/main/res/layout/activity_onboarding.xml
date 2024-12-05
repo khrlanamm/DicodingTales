@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
     tools:context=".ui.auth.onboarding.OnboardingActivity">
 
     <TextView
@@ -17,7 +16,6 @@
         android:layout_marginTop="16dp"
         android:alpha="0"
         android:text="@string/splash"
-        android:textColor="@color/black"
         android:textSize="46sp"
         android:textStyle="bold"
         tools:alpha="100" />
@@ -28,21 +26,21 @@
         android:layout_height="56dp"
         android:layout_gravity="start"
         android:layout_margin="8dp"
+        android:alpha="0"
         android:contentDescription="@string/splash"
         android:src="@drawable/identity"
-        android:alpha="0"
         tools:alpha="100" />
 
     <ImageView
         android:id="@+id/img_splash"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:src="@drawable/vintage01"
         android:layout_margin="8dp"
+        android:layout_weight="3"
         android:alpha="0"
-        tools:alpha="100"
-        android:contentDescription="@string/splash" />
+        android:contentDescription="@string/splash"
+        android:src="@drawable/vintage01"
+        tools:alpha="100" />
 
     <TextView
         android:id="@+id/txt_desc_splash"
@@ -53,7 +51,6 @@
         android:alpha="0"
         android:gravity="center"
         android:text="@string/description_splash"
-        android:textColor="@color/black"
         android:textSize="24sp"
         tools:alpha="100" />
 </LinearLayout>
