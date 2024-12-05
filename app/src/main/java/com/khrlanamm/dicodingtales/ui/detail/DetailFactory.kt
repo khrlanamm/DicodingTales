@@ -18,10 +18,10 @@ class DetailFactory(private val repository: Repository) : ViewModelProvider.NewI
     companion object {
         @Volatile
         private var INSTANCE: DetailFactory? = null
-        fun getInstance(context: Context): DetailFactory =
+        fun getInstance(): DetailFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: DetailFactory(
-                    Injection.repository(context)
+                    Injection.repository()
                 )
             }.also { INSTANCE = it }
     }

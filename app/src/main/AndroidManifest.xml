@@ -26,7 +26,7 @@
             android:resizeableActivity="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.auth.splash.SplashActivity"
+            android:name=".ui.auth.onboarding.OnboardingActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

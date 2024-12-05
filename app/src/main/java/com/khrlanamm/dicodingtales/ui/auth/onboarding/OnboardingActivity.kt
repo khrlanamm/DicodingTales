@@ -1,4 +1,4 @@
-package com.khrlanamm.dicodingtales.ui.auth.splash
+package com.khrlanamm.dicodingtales.ui.auth.onboarding
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -12,14 +12,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.khrlanamm.dicodingtales.R
-import com.khrlanamm.dicodingtales.databinding.ActivitySplashBinding
+import com.khrlanamm.dicodingtales.databinding.ActivityOnboardingBinding
 import com.khrlanamm.dicodingtales.ui.auth.AuthActivity
 
-class SplashActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySplashBinding
+class OnboardingActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOnboardingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
         }
         playAnimation()
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashActivity, AuthActivity::class.java)
+            val intent = Intent(this@OnboardingActivity, AuthActivity::class.java)
             startActivity(intent)
             finish()
         }, 7000)

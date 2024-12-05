@@ -18,10 +18,10 @@ class UploadFactory(private val repository: Repository) : ViewModelProvider.NewI
     companion object {
         @Volatile
         private var INSTANCE: UploadFactory? = null
-        fun getInstance(context: Context): UploadFactory =
+        fun getInstance(): UploadFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: UploadFactory(
-                    Injection.repository(context)
+                    Injection.repository()
                 )
             }.also { INSTANCE = it }
     }

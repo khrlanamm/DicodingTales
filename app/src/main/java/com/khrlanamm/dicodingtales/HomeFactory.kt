@@ -18,10 +18,10 @@ class HomeFactory(private val repository: Repository) : ViewModelProvider.NewIns
     companion object {
         @Volatile
         private var INSTANCE: HomeFactory? = null
-        fun getInstance(context: Context): HomeFactory =
+        fun getInstance(): HomeFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: HomeFactory(
-                    Injection.repository(context)
+                    Injection.repository()
                 )
             }.also { INSTANCE = it }
     }
