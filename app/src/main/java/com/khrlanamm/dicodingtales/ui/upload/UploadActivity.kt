@@ -30,7 +30,7 @@ class UploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadBinding
     private lateinit var sessionManager: SessionManager
     private val viewModel: UploadViewModel by viewModels {
-        UploadFactory.getInstance(this)
+        UploadFactory.getInstance()
     }
     private var currentImageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {

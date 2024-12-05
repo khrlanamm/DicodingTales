@@ -8,6 +8,77 @@
       <entry_point TYPE="field" FQNAME="com.khrlanamm.dicodingtales.ui.auth.register.RegisterFragment viewModel$delegate" />
       <entry_point TYPE="field" FQNAME="com.khrlanamm.dicodingtales.ui.upload.UploadActivity viewModel$delegate" />
     </entry_points>
+    <pattern value="com.khrlanamm.dicodingtales.ExampleUnitTest" method="addition_isCorrect" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.retrofit.ApiConfig" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.AuthActivity" />
+    <pattern value="com.khrlanamm.dicodingtales.data.local.pref.SessionManager.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.retrofit.ApiConfig.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.data.Repository.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.HomeAdapter.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.HomeFactory.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.login.LoginFactory.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.onboarding.OnboardingActivity.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.register.RegisterFactory.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.detail.DetailActivity.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.detail.DetailFactory.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.upload.UploadFactory.Companion" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.detail.DetailActivity" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.detail.DetailFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.detail.DetailFactory" method="DetailFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.DetailResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.DetailResponse" method="DetailResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.detail.DetailViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.detail.DetailViewModel" method="DetailViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.helper.EmailEditText" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.helper.EmailEditText" method="EmailEditText" />
+    <pattern value="com.khrlanamm.dicodingtales.ExampleInstrumentedTest" />
+    <pattern value="com.khrlanamm.dicodingtales.ExampleUnitTest" />
+    <pattern value="com.khrlanamm.dicodingtales.HomeViewModel" method="getAllStories" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.detail.DetailViewModel" method="getDetail" />
+    <pattern value="com.khrlanamm.dicodingtales.HomeAdapter" />
+    <pattern value="com.khrlanamm.dicodingtales.HomeFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.HomeFactory" method="HomeFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.HomeViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.HomeViewModel" method="HomeViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.di.Injection" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.login.LoginViewModel" method="login" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.login.LoginFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.login.LoginFactory" method="LoginFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.login.LoginFragment" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.LoginResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.LoginResponse" method="LoginResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.LoginResult" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.LoginResult" method="LoginResult" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.login.LoginViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.login.LoginViewModel" method="LoginViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.MainActivity" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.onboarding.OnboardingActivity" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.helper.PasswordEditText" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.helper.PasswordEditText" method="PasswordEditText" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.register.RegisterViewModel" method="register" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.register.RegisterFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.register.RegisterFactory" method="RegisterFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.register.RegisterFragment" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.RegisterResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.RegisterResponse" method="RegisterResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.register.RegisterViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.auth.register.RegisterViewModel" method="RegisterViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.data.Repository" />
+    <pattern value="com.khrlanamm.dicodingtales.data.Repository" method="Repository" />
+    <pattern value="com.khrlanamm.dicodingtales.data.local.pref.SessionManager" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.Story" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.Story" method="Story" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.StoryResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.StoryResponse" method="StoryResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.upload.UploadActivity" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.upload.UploadFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.upload.UploadFactory" method="UploadFactory" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.UploadResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.data.remote.response.UploadResponse" method="UploadResponse" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.upload.UploadViewModel" method="uploadStory" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.upload.UploadViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.ui.upload.UploadViewModel" method="UploadViewModel" />
+    <pattern value="com.khrlanamm.dicodingtales.ExampleInstrumentedTest" method="useAppContext" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
