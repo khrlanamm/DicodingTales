@@ -22,6 +22,7 @@ import java.util.TimeZone
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var sessionManager: SessionManager
+
     private val detailViewModel: DetailViewModel by viewModels {
         DetailFactory.getInstance()
     }
