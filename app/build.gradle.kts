@@ -37,35 +37,31 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        dataBinding = true
         buildConfig = true
     }
 }
 
 dependencies {
-    //splash screen
-    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation(libs.androidx.core.splashscreen)
 
-    //data from API
-    implementation("com.google.code.gson:gson:2.11.0") // Library Gson
-    implementation("com.squareup.retrofit2:retrofit:2.11.0") // Library Retrofit
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0") // Converter Gson untuk Retrofit
-    implementation("com.squareup.okhttp3:okhttp:4.12.0") // Library OkHttp
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0") // Logging Interceptor untuk OkHttp
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation(libs.androidx.activity) // Library Glide
-    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0") // Compiler untuk Glide
+    implementation(libs.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.glide)
+    implementation(libs.androidx.activity)
+    annotationProcessor(libs.compiler)
 
-    //livedata
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7") // LiveData KTX dari Lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7") // ViewModel KTX dari Lifecycle
-    implementation("androidx.activity:activity-ktx:1.9.3") // Activity KTX
-    implementation("androidx.recyclerview:recyclerview:1.3.2") // RecyclerView
-    implementation("androidx.legacy:legacy-support-v4:1.0.0") // Legacy Support Library v4
-    implementation("androidx.fragment:fragment-ktx:1.8.5") // Fragment KTX
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.fragment.ktx)
 
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    implementation(libs.material)
+    implementation(libs.androidx.viewpager2)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

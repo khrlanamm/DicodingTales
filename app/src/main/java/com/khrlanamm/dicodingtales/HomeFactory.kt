@@ -1,6 +1,5 @@
 package com.khrlanamm.dicodingtales
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.khrlanamm.dicodingtales.data.Repository
