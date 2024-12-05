@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val homeViewModel: HomeViewModel by viewModels {
         HomeFactory.getInstance(this)
     }
-
+    //test
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
