@@ -2,6 +2,7 @@
     <string name="app_name">Dicoding Tales</string>
     <string name="action_language">Language</string>
     <string name="action_logout">Logout</string>
+    <string name="action_map">Maps</string>
 
     <string name="splash">Welcome to, </string>
     <string name="description_splash">Capture your beautiful memories and share it with the world!</string>
