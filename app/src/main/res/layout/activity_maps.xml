@@ -17,7 +17,10 @@
         app:title="@string/action_map"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:titleTextColor="?attr/colorOnPrimary"
+        app:subtitleTextColor="@color/white"
+        app:theme="@style/ToolbarThemeWhite"/>
 
 
     <fragment
@@ -35,10 +38,10 @@
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintTop_toTopOf="parent"
-        map:layout_constraintBottom_toBottomOf="parent"
         android:indeterminateTint="?attr/colorPrimary"
-        android:visibility="gone"/>
+        android:visibility="visible"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
