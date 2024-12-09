@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.devtools.ksp") version "2.1.0-1.0.29"
     id("kotlin-parcelize")
+    alias(libs.plugins.map.secret)
 }
 
 android {

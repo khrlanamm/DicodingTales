@@ -48,6 +48,11 @@
     <string name="please_add_description">Tambahkan deskripsi</string>
     <string name="please_upload_an_image">Unggah sebuah gambar</string>
 
+    <string name="normal_type">Biasa</string>
+    <string name="satellite_type">Satelit</string>
+    <string name="terrain_type">Medan</string>
+    <string name="hybrid_type">Hibrid</string>
+
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>
 

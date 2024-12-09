@@ -14,9 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DicodingTales"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.maps.MapsActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAwKrZv4fecqYhg9RdX5f9KmLithuUIvUs" />
+            android:value="${GOOGLE_MAPS_API_KEY}"/>
+
         <activity
             android:name=".ui.upload.UploadActivity"
             android:exported="false" />

@@ -50,5 +50,10 @@
     <string name="please_add_description">Please add description</string>
     <string name="please_upload_an_image">Please upload an image</string>
 
+    <string name="normal_type">Default</string>
+    <string name="satellite_type">Satellite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
+
     <string name="image_placeholder">This is an image</string>
 </resources>

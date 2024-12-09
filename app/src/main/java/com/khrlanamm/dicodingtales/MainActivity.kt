@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.khrlanamm.dicodingtales.data.Result
@@ -17,6 +18,7 @@ import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.databinding.ActivityMainBinding
 import com.khrlanamm.dicodingtales.ui.auth.onboarding.OnboardingActivity
 import com.khrlanamm.dicodingtales.ui.detail.DetailActivity
+import com.khrlanamm.dicodingtales.ui.maps.MapsActivity
 import com.khrlanamm.dicodingtales.ui.upload.UploadActivity
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -121,6 +124,11 @@ class MainActivity : AppCompatActivity() {
 
             R.id.action_language -> {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+                true
+            }
+
+            R.id.action_map -> {
+                startActivity(Intent(this@MainActivity, MapsActivity::class.java))
                 true
             }
 
