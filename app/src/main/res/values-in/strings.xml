@@ -3,6 +3,7 @@
     <string name="app_name">Kisah Dicoding</string>
     <string name="action_language">Bahasa</string>
     <string name="action_logout">Keluar</string>
+    <string name="action_map">Jelajah</string>
 
     <string name="email">Surel</string>
     <string name="hint_email">Masukkan surel anda</string>

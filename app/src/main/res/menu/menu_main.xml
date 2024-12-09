@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.khrlanamm.dicodingtales.MainActivity">
     <item
+        android:id="@+id/action_map"
+        android:title="@string/action_map"
+        android:icon="@drawable/maps"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/action_language"
         android:title="@string/action_language"
         android:icon="@drawable/language"
