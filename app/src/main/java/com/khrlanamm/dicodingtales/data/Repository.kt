@@ -108,6 +108,24 @@ class Repository private constructor(
         }
     }
 
+    suspend fun getStoryWithMap(token: String, location: Int): Result<List<ListStoryItem>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val token = "Bearer $token"
+                val response = apiService.getStories(token, location = location)
+                if (!response.error) {
+                    Result.Success(response.listStory)
+                } else {
+                    Result.Error(response.message)
+                }
+            } catch (e: HttpException) {
+                Result.Error("Http Exception: ${e.message}")
+            } catch (e: Exception) {
+                Result.Error("An error occured: ${e.message}")
+            }
+        }
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: Repository? = null
