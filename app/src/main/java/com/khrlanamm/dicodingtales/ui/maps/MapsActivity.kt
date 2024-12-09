@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
@@ -90,20 +91,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
+    private fun truncateSnippet(snippet: String, maxLength: Int): String {
+        return if (snippet.length > maxLength) {
+            snippet.take(maxLength) + "..."
+        } else {
+            snippet
+        }
+    }
+
     private fun addManyMarker(stories: List<ListStoryItem>) {
         if (::mMap.isInitialized) {
             val boundsBuilder = LatLngBounds.builder()
+
+            val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.bangkit_mini)
 
             stories.forEach { story ->
                 val lat = story.lat
                 val lon = story.lon
                 if (lat != null && lon != null) {
                     val latLng = LatLng(lat as Double, lon as Double)
+
+                    val truncatedSnippet = story.description?.let {
+                        truncateSnippet(it, maxLength = 40)
+                    } ?: ""
+
                     mMap.addMarker(
                         MarkerOptions()
                             .position(latLng)
                             .title(story.name)
-                            .snippet(story.description)
+                            .snippet(truncatedSnippet)
+                            .icon(markerIcon)
                     )
                     boundsBuilder.include(latLng)
                 }
