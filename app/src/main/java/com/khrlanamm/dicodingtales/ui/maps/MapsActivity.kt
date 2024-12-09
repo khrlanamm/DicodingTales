@@ -1,7 +1,6 @@
 package com.khrlanamm.dicodingtales.ui.maps
 
 import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -9,20 +8,24 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.khrlanamm.dicodingtales.R
-import com.khrlanamm.dicodingtales.data.Result
-import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.forEach
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.khrlanamm.dicodingtales.databinding.ActivityMapsBinding
-import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
+import com.khrlanamm.dicodingtales.R
+import com.khrlanamm.dicodingtales.data.Result
+import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
+import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
+import com.khrlanamm.dicodingtales.databinding.ActivityMapsBinding
+import kotlinx.coroutines.launch
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -64,20 +67,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun observeViewModel() {
         mapsViewModel.stories.observe(this) { result ->
-            when(result) {
+            when (result) {
                 is Result.Success -> {
                     showLoading(false)
                     val stories = result.data
                     addManyMarker(stories)
                 }
+
                 is Result.Loading -> {
                     showLoading(true)
                 }
+
                 is Result.Error -> {
                     showLoading(false)
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        mapsViewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
+        }
+    }
+
+
+    private fun truncateSnippet(snippet: String, maxLength: Int): String {
+        return if (snippet.length > maxLength) {
+            snippet.take(maxLength) + "..."
+        } else {
+            snippet
         }
     }
 
@@ -85,16 +103,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (::mMap.isInitialized) {
             val boundsBuilder = LatLngBounds.builder()
 
+            val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.bangkit_mini)
+
             stories.forEach { story ->
                 val lat = story.lat
                 val lon = story.lon
                 if (lat != null && lon != null) {
                     val latLng = LatLng(lat as Double, lon as Double)
+
+                    val truncatedSnippet = story.description?.let {
+                        truncateSnippet(it, maxLength = 40)
+                    } ?: ""
+
                     mMap.addMarker(
                         MarkerOptions()
                             .position(latLng)
                             .title(story.name)
-                            .snippet(story.description)
+                            .snippet(truncatedSnippet)
+                            .icon(markerIcon)
                     )
                     boundsBuilder.include(latLng)
                 }
@@ -115,13 +141,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        showLoading(true)
+
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isIndoorLevelPickerEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
 
         setMapStyle()
+
+        lifecycleScope.launch {
+            kotlinx.coroutines.delay(5000)
+            showLoading(false)
+        }
     }
+
 
     private fun setMapStyle() {
         try {
@@ -137,32 +171,43 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.map_style, menu)
+
+        menu?.findItem(R.id.normal_type)?.isChecked = true
+
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        binding.toolbar.menu.forEach { menuItem ->
+            menuItem.isChecked = false
+        }
+        item.isChecked = true
+
+        return when (item.itemId) {
             R.id.normal_type -> {
                 mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
                 true
             }
+
             R.id.satellite_type -> {
                 mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
                 true
             }
+
             R.id.terrain_type -> {
                 mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
                 true
             }
+
             R.id.hybrid_type -> {
                 mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
                 true
             }
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
+
+            else -> super.onOptionsItemSelected(item)
         }
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE

@@ -3,7 +3,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#1d2c4d"
+        "color": "#ffffff"
       }
     ]
   },
@@ -11,7 +11,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#8ec3b9"
+        "color": "#333333"
       }
     ]
   },
@@ -19,7 +19,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#1a3646"
+        "color": "#ffffff"
       }
     ]
   },
@@ -28,7 +28,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#4b6878"
+        "color": "#bcbcbc"
       }
     ]
   },
@@ -37,7 +37,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#64779e"
+        "color": "#a9a9a9"
       }
     ]
   },
@@ -46,7 +46,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#4b6878"
+        "color": "#bcbcbc"
       }
     ]
   },
@@ -55,7 +55,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#334e87"
+        "color": "#dddddd"
       }
     ]
   },
@@ -64,7 +64,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#023e58"
+        "color": "#e0f3e0"
       }
     ]
   },
@@ -73,7 +73,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#283d6a"
+        "color": "#f0f4c3"
       }
     ]
   },
@@ -82,7 +82,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#6f9ba5"
+        "color": "#616161"
       }
     ]
   },
@@ -91,7 +91,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#1d2c4d"
+        "color": "#ffffff"
       }
     ]
   },
@@ -100,7 +100,7 @@
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#023e58"
+        "color": "#d0f5d0"
       }
     ]
   },
@@ -109,7 +109,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#3C7680"
+        "color": "#447a47"
       }
     ]
   },
@@ -118,7 +118,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#304a7d"
+        "color": "#ffffff"
       }
     ]
   },
@@ -127,7 +127,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#98a5be"
+        "color": "#757575"
       }
     ]
   },
@@ -136,7 +136,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#1d2c4d"
+        "color": "#ffffff"
       }
     ]
   },
@@ -145,7 +145,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#2c6675"
+        "color": "#d4e4ff"
       }
     ]
   },
@@ -154,7 +154,7 @@
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": "#255763"
+        "color": "#a6c7ff"
       }
     ]
   },
@@ -163,7 +163,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#b0d5ce"
+        "color": "#4d4d4d"
       }
     ]
   },
@@ -172,7 +172,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#023e58"
+        "color": "#ffffff"
       }
     ]
   },
@@ -181,7 +181,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#98a5be"
+        "color": "#757575"
       }
     ]
   },
@@ -190,7 +190,7 @@
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#1d2c4d"
+        "color": "#ffffff"
       }
     ]
   },
@@ -199,7 +199,7 @@
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#283d6a"
+        "color": "#e0e0e0"
       }
     ]
   },
@@ -208,7 +208,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#3a4762"
+        "color": "#d6d6d6"
       }
     ]
   },
@@ -217,7 +217,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#0e1626"
+        "color": "#a1d5f5"
       }
     ]
   },
@@ -226,7 +226,7 @@
     "elementType": "labels.text.fill",
     "stylers": [
       {
-        "color": "#4e6d70"
+        "color": "#505050"
       }
     ]
   }
