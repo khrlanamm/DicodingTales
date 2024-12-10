@@ -1,10 +1,13 @@
 package com.khrlanamm.dicodingtales.data
 
 import androidx.lifecycle.LiveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
+import com.khrlanamm.dicodingtales.data.local.entity.StoryEntity
+import com.khrlanamm.dicodingtales.data.local.room.StoryDatabase
 import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
 import com.khrlanamm.dicodingtales.data.remote.response.LoginResponse
 import com.khrlanamm.dicodingtales.data.remote.response.RegisterResponse
@@ -12,13 +15,16 @@ import com.khrlanamm.dicodingtales.data.remote.response.Story
 import com.khrlanamm.dicodingtales.data.remote.response.UploadResponse
 import com.khrlanamm.dicodingtales.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class Repository private constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val database: StoryDatabase
 ) {
 
     suspend fun login(email: String, password: String): Result<LoginResponse> {
@@ -130,24 +136,53 @@ class Repository private constructor(
             }
         }
     }
-    fun getStoriesPaging(token: String): LiveData<PagingData<ListStoryItem>> {
+    @OptIn(ExperimentalPagingApi::class)
+    fun getStoriesPaging(token: String): Flow<PagingData<ListStoryItem>> {
+        val pagingSourceFactory = {
+            database.storyDao().getAllStories().value?.map { it.toDomain() } ?: emptyList()
+        }
+
         return Pager(
-            config = PagingConfig(
-                pageSize = 5
-            ),
-            pagingSourceFactory = {
-                StoryPagingSource(apiService, token)
-            }
-        ).liveData
+            config = PagingConfig(pageSize = 5),
+            remoteMediator = StoriesRemoteMediator(token, database, apiService),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
+
+
+
+    fun ListStoryItem.toEntity(): StoryEntity {
+        return StoryEntity(
+            id = id,
+            photoUrl = photoUrl,
+            createdAt = createdAt,
+            name = name,
+            description = description,
+            lon = lon,
+            lat = lat
+        )
+    }
+
+    fun StoryEntity.toDomain(): ListStoryItem {
+        return ListStoryItem(
+            id = id,
+            photoUrl = photoUrl,
+            createdAt = createdAt,
+            name = name,
+            description = description,
+            lon = lon,
+            lat = lat
+        )
     }
 
     companion object {
         @Volatile
         private var INSTANCE: Repository? = null
         fun getInstance(
-            apiService: ApiService
+            apiService: ApiService,
+            database: StoryDatabase
         ): Repository = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: Repository(apiService)
+            INSTANCE ?: Repository(apiService, database)
         }.also { INSTANCE = it }
     }
 }
