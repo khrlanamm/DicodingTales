@@ -1,4 +1,4 @@
-package com.khrlanamm.dicodingtales
+package com.khrlanamm.dicodingtales.helper
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import com.khrlanamm.dicodingtales.databinding.ItemLoadingBinding
 
 class LoadingStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<LoadingStateAdapter.LoadingStateViewHolder>() {
     override fun onBindViewHolder(
-        holder: LoadingStateAdapter.LoadingStateViewHolder,
+        holder: LoadingStateViewHolder,
         loadState: LoadState
     ) {
         holder.bind(loadState)
@@ -19,7 +19,7 @@ class LoadingStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<Load
     override fun onCreateViewHolder(
         parent: ViewGroup,
         loadState: LoadState
-    ): LoadingStateAdapter.LoadingStateViewHolder {
+    ): LoadingStateViewHolder {
         val binding = ItemLoadingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LoadingStateViewHolder(binding, retry)
     }

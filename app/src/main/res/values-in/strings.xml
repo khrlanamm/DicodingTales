@@ -57,6 +57,7 @@
     <string name="unable_to_get_location">Gagal memuat lokasi</string>
 
     <string name="reload">Muat Ulang</string>
+    <string name="error">Gagal Memuat Data</string>
 
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>

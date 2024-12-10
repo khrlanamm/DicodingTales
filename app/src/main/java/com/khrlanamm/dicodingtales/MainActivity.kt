@@ -12,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.khrlanamm.dicodingtales.helper.HomeAdapter
+import com.khrlanamm.dicodingtales.helper.HomeFactory
+import com.khrlanamm.dicodingtales.helper.HomeViewModel
+import com.khrlanamm.dicodingtales.helper.LoadingStateAdapter
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.databinding.ActivityMainBinding
 import com.khrlanamm.dicodingtales.ui.auth.onboarding.OnboardingActivity
@@ -24,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     private lateinit var adapter: HomeAdapter
     private val homeViewModel: HomeViewModel by viewModels {
-        HomeFactory.getInstance()
+        HomeFactory.Companion.getInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object {
-        private const val TIMEOUT_IN_SECONDS = 120
+        private const val TIMEOUT_IN_SECONDS = 20
 
         fun getApiService(): ApiService {
             val loggingInterceptor = if (BuildConfig.DEBUG) {
