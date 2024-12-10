@@ -2,8 +2,8 @@ package com.khrlanamm.dicodingtales
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
@@ -14,7 +14,7 @@ import java.util.Locale
 import java.util.TimeZone
 
 class HomeAdapter(private val onItemClick: (ListStoryItem) -> Unit) :
-    ListAdapter<ListStoryItem, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
+    PagingDataAdapter<ListStoryItem, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
 
     inner class HomeViewHolder(private val binding: ItemStoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -40,7 +40,9 @@ class HomeAdapter(private val onItemClick: (ListStoryItem) -> Unit) :
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val story = getItem(position)
-        holder.bind(story)
+        if (story != null) {
+            holder.bind(story)
+        }
     }
 
     companion object {

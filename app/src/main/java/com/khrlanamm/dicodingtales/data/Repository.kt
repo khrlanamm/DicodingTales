@@ -1,5 +1,10 @@
 package com.khrlanamm.dicodingtales.data
 
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
 import com.khrlanamm.dicodingtales.data.remote.response.LoginResponse
 import com.khrlanamm.dicodingtales.data.remote.response.RegisterResponse
@@ -124,6 +129,16 @@ class Repository private constructor(
                 Result.Error("An error occured: ${e.message}")
             }
         }
+    }
+    fun getStoriesPaging(token: String): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService, token)
+            }
+        ).liveData
     }
 
     companion object {

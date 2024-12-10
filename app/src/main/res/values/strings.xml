@@ -58,5 +58,7 @@
     <string name="upload_location">Upload Location    </string>
     <string name="unable_to_get_location">Unable to get location</string>
 
+    <string name="reload">Reload</string>
+
     <string name="image_placeholder">This is an image</string>
 </resources>
