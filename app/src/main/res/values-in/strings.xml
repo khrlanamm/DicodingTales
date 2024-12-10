@@ -53,6 +53,9 @@
     <string name="terrain_type">Medan</string>
     <string name="hybrid_type">Hibrid</string>
 
+    <string name="upload_location">Unggah Lokasi    </string>
+    <string name="unable_to_get_location">Gagal memuat lokasi</string>
+
     <string name="splash">Selamat Datang, </string>
     <string name="description_splash">Abadikan semua kenangan berharga anda dan bagikan kebahagiaan kepada dunia!</string>
 

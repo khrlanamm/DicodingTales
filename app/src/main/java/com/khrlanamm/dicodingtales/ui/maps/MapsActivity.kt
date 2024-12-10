@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private lateinit var mMap: GoogleMap
+    private lateinit var gMaps: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private lateinit var sessionManager: SessionManager
     private val mapsViewModel: MapsViewModel by viewModels {
@@ -100,7 +100,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun addManyMarker(stories: List<ListStoryItem>) {
-        if (::mMap.isInitialized) {
+        if (::gMaps.isInitialized) {
             val boundsBuilder = LatLngBounds.builder()
 
             val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.bangkit_mini)
@@ -115,7 +115,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         truncateSnippet(it, maxLength = 40)
                     } ?: ""
 
-                    mMap.addMarker(
+                    gMaps.addMarker(
                         MarkerOptions()
                             .position(latLng)
                             .title(story.name)
@@ -126,7 +126,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
             val bounds = boundsBuilder.build()
-            mMap.animateCamera(
+            gMaps.animateCamera(
                 CameraUpdateFactory.newLatLngBounds(
                     bounds,
                     resources.displayMetrics.widthPixels,
@@ -139,14 +139,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+        gMaps = googleMap
+
+        val indonesiaLocation = LatLng(-2.548926, 118.014863)
+        gMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesiaLocation, 5f))
 
         showLoading(true)
 
-        mMap.uiSettings.isZoomControlsEnabled = true
-        mMap.uiSettings.isIndoorLevelPickerEnabled = true
-        mMap.uiSettings.isCompassEnabled = true
-        mMap.uiSettings.isMapToolbarEnabled = true
+        gMaps.uiSettings.isZoomControlsEnabled = true
+        gMaps.uiSettings.isIndoorLevelPickerEnabled = true
+        gMaps.uiSettings.isCompassEnabled = true
+        gMaps.uiSettings.isMapToolbarEnabled = true
 
         setMapStyle()
 
@@ -160,7 +163,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun setMapStyle() {
         try {
             val success =
-                mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
+                gMaps.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_style))
             if (!success) {
                 Log.e(TAG, "Style parsing failed.")
             }
@@ -185,22 +188,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         return when (item.itemId) {
             R.id.normal_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+                gMaps.mapType = GoogleMap.MAP_TYPE_NORMAL
                 true
             }
 
             R.id.satellite_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                gMaps.mapType = GoogleMap.MAP_TYPE_SATELLITE
                 true
             }
 
             R.id.terrain_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
+                gMaps.mapType = GoogleMap.MAP_TYPE_TERRAIN
                 true
             }
 
             R.id.hybrid_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
+                gMaps.mapType = GoogleMap.MAP_TYPE_HYBRID
                 true
             }
 
