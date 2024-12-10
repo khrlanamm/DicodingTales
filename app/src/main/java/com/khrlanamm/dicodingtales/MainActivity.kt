@@ -6,14 +6,12 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.khrlanamm.dicodingtales.data.Result
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.databinding.ActivityMainBinding
 import com.khrlanamm.dicodingtales.ui.auth.onboarding.OnboardingActivity
@@ -57,6 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        val token = sessionManager.getAuthToken()
+        if (token != null) {
+            homeViewModel.stories(token)
+        }
+    }
+
     private fun setupRecyclerView() {
         adapter = HomeAdapter { story ->
             val intent = Intent(this, DetailActivity::class.java).apply {
@@ -68,6 +74,11 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             adapter = this@MainActivity.adapter
         }
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
     }
 
     private fun checkAuthentication() {
@@ -75,28 +86,19 @@ class MainActivity : AppCompatActivity() {
         if (token == null) {
             navigateToOnboarding()
         } else {
-            homeViewModel.getAllStories(token)
+            homeViewModel.stories(token)
         }
     }
 
     private fun observeViewModel() {
+        val token = sessionManager.getAuthToken()
+        if (token != null) {
+            homeViewModel.stories(token).observe(this) { pagingData ->
+                adapter.submitData(lifecycle, pagingData)
+            }
+        }
         homeViewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
-        }
-
-        homeViewModel.stories.observe(this) { result ->
-            when (result) {
-                is Result.Loading -> showLoading(true)
-                is Result.Success -> {
-                    showLoading(false)
-                    adapter.submitList(result.data)
-                }
-
-                is Result.Error -> {
-                    showLoading(false)
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-                }
-            }
         }
     }
 
