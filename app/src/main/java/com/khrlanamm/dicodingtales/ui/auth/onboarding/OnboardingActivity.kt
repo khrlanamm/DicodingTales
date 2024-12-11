@@ -46,6 +46,7 @@ class OnboardingActivity : AppCompatActivity() {
             start()
         }
     }
+
     companion object {
         private const val ONBOARDING_DELAY_MILLIS: Long = 7000L
     }

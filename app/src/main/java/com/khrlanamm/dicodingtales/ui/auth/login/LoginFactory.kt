@@ -1,5 +1,6 @@
 package com.khrlanamm.dicodingtales.ui.auth.login
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.khrlanamm.dicodingtales.data.Repository
@@ -17,10 +18,10 @@ class LoginFactory(private val repository: Repository) : ViewModelProvider.NewIn
     companion object {
         @Volatile
         private var INSTANCE: LoginFactory? = null
-        fun getInstance(): LoginFactory =
+        fun getInstance(context: Context): LoginFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: LoginFactory(
-                    Injection.repository()
+                    Injection.repository(context)
                 )
             }.also { INSTANCE = it }
     }

@@ -33,7 +33,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var sessionManager: SessionManager
     private val mapsViewModel: MapsViewModel by viewModels {
-        MapsFactory.getInstance()
+        MapsFactory.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

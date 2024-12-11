@@ -34,7 +34,7 @@ class UploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadBinding
     private lateinit var sessionManager: SessionManager
     private val viewModel: UploadViewModel by viewModels {
-        UploadFactory.getInstance()
+        UploadFactory.getInstance(this)
     }
     private var currentImageUri: Uri? = null
     private var latitude: Double? = null

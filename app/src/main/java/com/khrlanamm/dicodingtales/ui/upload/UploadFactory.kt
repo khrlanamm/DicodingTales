@@ -1,5 +1,6 @@
 package com.khrlanamm.dicodingtales.ui.upload
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.khrlanamm.dicodingtales.data.Repository
@@ -17,10 +18,10 @@ class UploadFactory(private val repository: Repository) : ViewModelProvider.NewI
     companion object {
         @Volatile
         private var INSTANCE: UploadFactory? = null
-        fun getInstance(): UploadFactory =
+        fun getInstance(context: Context): UploadFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: UploadFactory(
-                    Injection.repository()
+                    Injection.repository(context)
                 )
             }.also { INSTANCE = it }
     }

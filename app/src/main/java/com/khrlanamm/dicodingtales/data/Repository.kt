@@ -1,14 +1,17 @@
 package com.khrlanamm.dicodingtales.data
 
 import androidx.lifecycle.LiveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
+import com.khrlanamm.dicodingtales.data.local.room.RemoteKeysDao
+import com.khrlanamm.dicodingtales.data.local.room.StoryDao
 import com.khrlanamm.dicodingtales.data.remote.response.LoginResponse
 import com.khrlanamm.dicodingtales.data.remote.response.RegisterResponse
 import com.khrlanamm.dicodingtales.data.remote.response.Story
+import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
 import com.khrlanamm.dicodingtales.data.remote.response.UploadResponse
 import com.khrlanamm.dicodingtales.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +21,9 @@ import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class Repository private constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val storyDao: StoryDao,
+    private val remoteKeysDao: RemoteKeysDao
 ) {
 
     suspend fun login(email: String, password: String): Result<LoginResponse> {
@@ -49,24 +54,6 @@ class Repository private constructor(
                 }
             } catch (e: HttpException) {
                 Result.Error("${e.message}")
-            }
-        }
-    }
-
-    suspend fun getAllStories(token: String): Result<List<StoryEntity>> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val token = "Bearer $token"
-                val response = apiService.getStories(token)
-                if (!response.error) {
-                    Result.Success(response.listStory)
-                } else {
-                    Result.Error(response.message)
-                }
-            } catch (e: HttpException) {
-                Result.Error("Http Exception: ${e.message}")
-            } catch (e: Exception) {
-                Result.Error("An error occured: ${e.message}")
             }
         }
     }
@@ -130,24 +117,27 @@ class Repository private constructor(
             }
         }
     }
-    fun getStoriesPaging(token: String): LiveData<PagingData<StoryEntity>> {
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun getStoriesPagingWithMediator(token: String): LiveData<PagingData<StoryEntity>> {
+        val pagingSourceFactory = { storyDao.getStories() }
         return Pager(
-            config = PagingConfig(
-                pageSize = 5
-            ),
-            pagingSourceFactory = {
-                StoryPagingSource(apiService, token)
-            }
+            config = PagingConfig(pageSize = 10),
+            remoteMediator = StoryRemoteMediator(apiService, storyDao, remoteKeysDao, token),
+            pagingSourceFactory = pagingSourceFactory
         ).liveData
     }
+
 
     companion object {
         @Volatile
         private var INSTANCE: Repository? = null
         fun getInstance(
-            apiService: ApiService
+            apiService: ApiService,
+            storyDao: StoryDao,
+            remoteKeysDao: RemoteKeysDao
         ): Repository = INSTANCE ?: synchronized(this) {
-            INSTANCE ?: Repository(apiService)
+            INSTANCE ?: Repository(apiService, storyDao, remoteKeysDao)
         }.also { INSTANCE = it }
     }
 }

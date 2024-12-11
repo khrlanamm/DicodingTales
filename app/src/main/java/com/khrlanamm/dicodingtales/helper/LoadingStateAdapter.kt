@@ -8,7 +8,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.khrlanamm.dicodingtales.databinding.ItemLoadingBinding
 
-class LoadingStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<LoadingStateAdapter.LoadingStateViewHolder>() {
+class LoadingStateAdapter(private val retry: () -> Unit) :
+    LoadStateAdapter<LoadingStateAdapter.LoadingStateViewHolder>() {
     override fun onBindViewHolder(
         holder: LoadingStateViewHolder,
         loadState: LoadState
@@ -29,6 +30,7 @@ class LoadingStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<Load
         init {
             binding.retryButton.setOnClickListener { retry.invoke() }
         }
+
         fun bind(loadState: LoadState) {
             if (loadState is LoadState.Error) {
                 binding.errorMsg.text = loadState.error.localizedMessage

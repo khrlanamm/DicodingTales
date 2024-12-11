@@ -15,7 +15,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
 
     fun stories(token: String): LiveData<PagingData<StoryEntity>> {
         _isLoading.value = true
-        return repository.getStoriesPaging(token)
+        return repository.getStoriesPagingWithMediator(token)
             .cachedIn(viewModelScope)
             .also {
                 _isLoading.value = false
