@@ -6,19 +6,19 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
+import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
 import com.khrlanamm.dicodingtales.databinding.ItemStoryBinding
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 
-class HomeAdapter(private val onItemClick: (ListStoryItem) -> Unit) :
-    PagingDataAdapter<ListStoryItem, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
+class HomeAdapter(private val onItemClick: (StoryEntity) -> Unit) :
+    PagingDataAdapter<StoryEntity, HomeAdapter.HomeViewHolder>(DIFF_CALLBACK) {
 
     inner class HomeViewHolder(private val binding: ItemStoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(story: ListStoryItem) {
+        fun bind(story: StoryEntity) {
             binding.tvItemName.text = story.name
             binding.tvItemDesc.text = story.description
             binding.tvItemDate.text = formatDate(story.createdAt)
@@ -46,14 +46,14 @@ class HomeAdapter(private val onItemClick: (ListStoryItem) -> Unit) :
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListStoryItem>() {
-            override fun areItemsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryEntity>() {
+            override fun areItemsTheSame(oldItem: StoryEntity, newItem: StoryEntity): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: ListStoryItem,
-                newItem: ListStoryItem
+                oldItem: StoryEntity,
+                newItem: StoryEntity
             ): Boolean {
                 return oldItem == newItem
             }

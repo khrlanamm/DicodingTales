@@ -2,20 +2,20 @@ package com.khrlanamm.dicodingtales.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
+import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
 import com.khrlanamm.dicodingtales.data.remote.retrofit.ApiService
 
 class StoryPagingSource(private val apiService: ApiService, private val token: String) :
-    PagingSource<Int, ListStoryItem>() {
+    PagingSource<Int, StoryEntity>() {
 
-    override fun getRefreshKey(state: PagingState<Int, ListStoryItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, StoryEntity>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ListStoryItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, StoryEntity> {
         return try {
             val position = params.key ?: INITIAL_PAGE_INDEX
             val responseData =

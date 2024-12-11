@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.khrlanamm.dicodingtales.R
 import com.khrlanamm.dicodingtales.data.Result
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
-import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
+import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
 import com.khrlanamm.dicodingtales.databinding.ActivityMapsBinding
 import kotlinx.coroutines.launch
 
@@ -99,7 +99,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun addManyMarker(stories: List<ListStoryItem>) {
+    private fun addManyMarker(stories: List<StoryEntity>) {
         if (::gMaps.isInitialized) {
             val boundsBuilder = LatLngBounds.builder()
             val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.bangkit_mini)

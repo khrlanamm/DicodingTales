@@ -1,11 +1,13 @@
 package com.khrlanamm.dicodingtales.data.remote.response
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class StoryResponse(
 
     @field:SerializedName("listStory")
-    val listStory: List<ListStoryItem>,
+    val listStory: List<StoryEntity>,
 
     @field:SerializedName("error")
     val error: Boolean,
@@ -14,7 +16,8 @@ data class StoryResponse(
     val message: String
 )
 
-data class ListStoryItem(
+@Entity(tableName = "story")
+data class StoryEntity(
 
     @field:SerializedName("photoUrl")
     val photoUrl: String,
@@ -32,7 +35,7 @@ data class ListStoryItem(
     val lon: Double? = null,
 
     @field:SerializedName("id")
-    val id: String,
+    @PrimaryKey val id: String,
 
     @field:SerializedName("lat")
     val lat: Double? = null
