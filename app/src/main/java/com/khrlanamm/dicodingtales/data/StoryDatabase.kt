@@ -11,7 +11,7 @@ import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
 
 @Database(
     entities = [StoryEntity::class, RemoteKeys::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class StoryDatabase : RoomDatabase() {
