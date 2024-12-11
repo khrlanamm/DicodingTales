@@ -6,7 +6,6 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.khrlanamm.dicodingtales.data.local.entity.RemoteKeys
-import com.khrlanamm.dicodingtales.data.StoryDatabase
 import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
 import com.khrlanamm.dicodingtales.data.remote.retrofit.ApiService
 
@@ -23,7 +22,10 @@ class StoryRemoteMediator(
     ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> INITIAL_PAGE_INDEX
-            LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
+            LoadType.PREPEND -> {
+                val remoteKeys = getLastRemoteKey(state)
+                remoteKeys?.prevKey ?: return MediatorResult.Success(endOfPaginationReached = true)
+            }
             LoadType.APPEND -> {
                 val remoteKeys = getLastRemoteKey(state)
                 remoteKeys?.nextKey ?: return MediatorResult.Success(endOfPaginationReached = true)

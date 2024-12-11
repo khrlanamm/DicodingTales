@@ -6,7 +6,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.khrlanamm.dicodingtales.data.StoryDatabase
 import com.khrlanamm.dicodingtales.data.remote.response.*
 import com.khrlanamm.dicodingtales.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +13,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
+import androidx.lifecycle.viewModelScope
 
 class Repository private constructor(
     private val apiService: ApiService,
@@ -93,6 +93,7 @@ class Repository private constructor(
         }
     }
 
+
     suspend fun getStoryWithMap(token: String, location: Int): Result<List<StoryEntity>> {
         return withContext(Dispatchers.IO) {
             try {
@@ -113,10 +114,10 @@ class Repository private constructor(
 
     @OptIn(ExperimentalPagingApi::class)
     fun getStoriesPagingWithMediator(token: String): LiveData<PagingData<StoryEntity>> {
-        val pagingSourceFactory = { database.storyDao().getStories() } // Gunakan DAO dari database
+        val pagingSourceFactory = { database.storyDao().getStories() }
         return Pager(
             config = PagingConfig(pageSize = 10),
-            remoteMediator = StoryRemoteMediator(apiService, database, token), // Berikan database
+            remoteMediator = StoryRemoteMediator(apiService, database, token),
             pagingSourceFactory = pagingSourceFactory
         ).liveData
     }

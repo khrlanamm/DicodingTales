@@ -71,7 +71,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 is Result.Success -> {
                     showLoading(false)
                     val stories = result.data
-                    addManyMarker(stories)
+                    if (stories.isNotEmpty()) {
+                        addManyMarker(stories)
+                    } else {
+                        Toast.makeText(this, "No stories available", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 is Result.Loading -> {
@@ -142,8 +146,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         gMaps = googleMap
 
-        showLoading(true)
-
         gMaps.uiSettings.isZoomControlsEnabled = true
         gMaps.uiSettings.isIndoorLevelPickerEnabled = true
         gMaps.uiSettings.isCompassEnabled = true
@@ -151,11 +153,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setMapStyle()
 
-        lifecycleScope.launch {
-            kotlinx.coroutines.delay(5000)
-            showLoading(false)
+        val token = sessionManager.getAuthToken()
+        token?.let {
+            mapsViewModel.getAllStoriesWithMap(it)
         }
     }
+
+
 
 
     private fun setMapStyle() {
