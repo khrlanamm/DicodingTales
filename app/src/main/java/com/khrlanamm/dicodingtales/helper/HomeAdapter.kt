@@ -1,4 +1,4 @@
-package com.khrlanamm.dicodingtales
+package com.khrlanamm.dicodingtales.helper
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

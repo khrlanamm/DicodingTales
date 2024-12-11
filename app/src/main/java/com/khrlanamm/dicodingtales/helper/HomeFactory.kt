@@ -1,4 +1,4 @@
-package com.khrlanamm.dicodingtales
+package com.khrlanamm.dicodingtales.helper
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

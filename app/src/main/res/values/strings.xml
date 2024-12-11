@@ -59,6 +59,7 @@
     <string name="unable_to_get_location">Unable to get location</string>
 
     <string name="reload">Reload</string>
+    <string name="error">Failed to Load Data</string>
 
     <string name="image_placeholder">This is an image</string>
 </resources>

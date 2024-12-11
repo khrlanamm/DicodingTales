@@ -61,6 +61,10 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
 
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
     implementation(libs.material)
     implementation(libs.androidx.viewpager2)
 
@@ -78,7 +82,10 @@ dependencies {
     implementation(libs.android.maps.utils)
     implementation(libs.play.services.home)
     implementation(libs.play.services.maps)
+
+    implementation(libs.androidx.room.paging)
     implementation(libs.androidx.paging.runtime.ktx)
+
     androidTestImplementation(libs.androidx.core)
     androidTestImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.androidx.core)

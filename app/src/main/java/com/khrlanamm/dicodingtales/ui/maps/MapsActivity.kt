@@ -102,14 +102,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun addManyMarker(stories: List<ListStoryItem>) {
         if (::gMaps.isInitialized) {
             val boundsBuilder = LatLngBounds.builder()
-
             val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.bangkit_mini)
 
             stories.forEach { story ->
                 val lat = story.lat
                 val lon = story.lon
                 if (lat != null && lon != null) {
-                    val latLng = LatLng(lat as Double, lon as Double)
+                    val latLng = LatLng(lat, lon)
 
                     val truncatedSnippet = story.description?.let {
                         truncateSnippet(it, maxLength = 40)
@@ -125,24 +124,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     boundsBuilder.include(latLng)
                 }
             }
+
             val bounds = boundsBuilder.build()
+            val padding = (resources.displayMetrics.widthPixels * 0.10).toInt()
             gMaps.animateCamera(
                 CameraUpdateFactory.newLatLngBounds(
                     bounds,
                     resources.displayMetrics.widthPixels,
                     resources.displayMetrics.heightPixels,
-                    300
+                    padding
                 )
             )
-
         }
     }
 
+
     override fun onMapReady(googleMap: GoogleMap) {
         gMaps = googleMap
-
-        val indonesiaLocation = LatLng(-2.548926, 118.014863)
-        gMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(indonesiaLocation, 5f))
 
         showLoading(true)
 
