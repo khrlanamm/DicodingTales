@@ -82,7 +82,10 @@ dependencies {
     implementation(libs.android.maps.utils)
     implementation(libs.play.services.home)
     implementation(libs.play.services.maps)
+
+    implementation(libs.androidx.room.paging)
     implementation(libs.androidx.paging.runtime.ktx)
+
     androidTestImplementation(libs.androidx.core)
     androidTestImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.androidx.core)
