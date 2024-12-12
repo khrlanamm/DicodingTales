@@ -14,7 +14,7 @@ appcompat = "1.7.0"
 kotlinxCoroutinesTest = "1.7.3"
 material = "1.12.0"
 constraintlayout = "2.2.0"
-mockitoCore = "5.5.0"
+mockk = "1.13.5"
 navigationFragmentKtx = "2.8.5"
 navigationUiKtx = "2.8.5"
 activity = "1.9.3"
@@ -23,7 +23,7 @@ lifecycleLivedataKtx = "2.8.7"
 lifecycleViewmodelKtx = "2.8.7"
 fragmentKtx = "1.8.5"
 okhttp = "4.12.0"
-pagingRuntimeKtx = "3.3.4"
+pagingRuntimeKtx = "3.3.5"
 playServicesBase = "18.5.0"
 playServicesHome = "16.0.0"
 playServicesLocation = "21.3.0"
@@ -66,8 +66,7 @@ androidx-legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
-mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoCore" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 play-services-home = { module = "com.google.android.gms:play-services-home", version.ref = "playServicesHome" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }

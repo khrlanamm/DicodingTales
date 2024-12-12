@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -23,9 +22,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.khrlanamm.dicodingtales.R
 import com.khrlanamm.dicodingtales.data.Result
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
-import com.khrlanamm.dicodingtales.data.remote.response.ListStoryItem
+import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
 import com.khrlanamm.dicodingtales.databinding.ActivityMapsBinding
-import kotlinx.coroutines.launch
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -33,7 +31,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var sessionManager: SessionManager
     private val mapsViewModel: MapsViewModel by viewModels {
-        MapsFactory.getInstance()
+        MapsFactory.getInstance(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +69,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 is Result.Success -> {
                     showLoading(false)
                     val stories = result.data
-                    addManyMarker(stories)
+                    if (stories.isNotEmpty()) {
+                        addManyMarker(stories)
+                    } else {
+                        Toast.makeText(this, "No stories available", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
                 is Result.Loading -> {
@@ -91,7 +93,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    private fun truncateSnippet(snippet: String, maxLength: Int): String {
+    private fun truncateSnippet(snippet: String): String {
+        val maxLength = 40
         return if (snippet.length > maxLength) {
             snippet.take(maxLength) + "..."
         } else {
@@ -99,10 +102,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun addManyMarker(stories: List<ListStoryItem>) {
+    private fun addManyMarker(stories: List<StoryEntity>) {
         if (::gMaps.isInitialized) {
             val boundsBuilder = LatLngBounds.builder()
-            val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.bangkit_mini)
+            val markerIcon = BitmapDescriptorFactory.fromResource(R.mipmap.bangkit_mini)
 
             stories.forEach { story ->
                 val lat = story.lat
@@ -110,9 +113,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (lat != null && lon != null) {
                     val latLng = LatLng(lat, lon)
 
-                    val truncatedSnippet = story.description?.let {
-                        truncateSnippet(it, maxLength = 40)
-                    } ?: ""
+                    val truncatedSnippet = truncateSnippet(story.description)
 
                     gMaps.addMarker(
                         MarkerOptions()
@@ -142,8 +143,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         gMaps = googleMap
 
-        showLoading(true)
-
         gMaps.uiSettings.isZoomControlsEnabled = true
         gMaps.uiSettings.isIndoorLevelPickerEnabled = true
         gMaps.uiSettings.isCompassEnabled = true
@@ -151,9 +150,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setMapStyle()
 
-        lifecycleScope.launch {
-            kotlinx.coroutines.delay(5000)
-            showLoading(false)
+        val token = sessionManager.getAuthToken()
+        token?.let {
+            mapsViewModel.getAllStoriesWithMap(it)
         }
     }
 

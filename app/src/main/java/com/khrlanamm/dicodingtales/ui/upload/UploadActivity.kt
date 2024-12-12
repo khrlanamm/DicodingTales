@@ -34,9 +34,10 @@ class UploadActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadBinding
     private lateinit var sessionManager: SessionManager
     private val viewModel: UploadViewModel by viewModels {
-        UploadFactory.getInstance()
+        UploadFactory.getInstance(this)
     }
     private var currentImageUri: Uri? = null
+    private var tempImageUri: Uri? = null
     private var latitude: Double? = null
     private var longitude: Double? = null
 
@@ -110,7 +111,6 @@ class UploadActivity : AppCompatActivity() {
         }
     }
 
-
     private fun observeViewModel() {
         viewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
@@ -178,7 +178,6 @@ class UploadActivity : AppCompatActivity() {
         )
     }
 
-
     private fun startGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
@@ -188,6 +187,7 @@ class UploadActivity : AppCompatActivity() {
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
+            tempImageUri = uri
             showImage()
         } else {
             Toast.makeText(this, getString(R.string.no_media_selected), Toast.LENGTH_SHORT).show()
@@ -203,9 +203,11 @@ class UploadActivity : AppCompatActivity() {
         ActivityResultContracts.TakePicture()
     ) { isSuccess ->
         if (isSuccess) {
+            tempImageUri = currentImageUri
             showImage()
         } else {
-            currentImageUri = null
+            currentImageUri = tempImageUri
+            showImage()
         }
     }
 
@@ -214,5 +216,4 @@ class UploadActivity : AppCompatActivity() {
             binding.imgPreview.setImageURI(it)
         }
     }
-
 }

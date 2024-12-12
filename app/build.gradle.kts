@@ -42,6 +42,8 @@ android {
     }
 }
 
+
+
 dependencies {
     implementation(libs.androidx.core.splashscreen)
 
@@ -90,7 +92,7 @@ dependencies {
     androidTestImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.androidx.core)
     testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.mockito.core)
-    testImplementation(libs.mockito.inline)
     testImplementation(libs.androidx.core.testing)
+
+    testImplementation(libs.mockk)
 }

@@ -1,5 +1,6 @@
 package com.khrlanamm.dicodingtales.ui.maps
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.khrlanamm.dicodingtales.data.Repository
@@ -19,10 +20,10 @@ class MapsFactory(private val repository: Repository) :
     companion object {
         @Volatile
         private var INSTANCE: MapsFactory? = null
-        fun getInstance(): MapsFactory =
+        fun getInstance(context: Context): MapsFactory =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: MapsFactory(
-                    Injection.repository()
+                    Injection.repository(context)
                 )
             }.also { INSTANCE = it }
     }

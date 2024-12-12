@@ -1,4 +1,4 @@
-@file:Suppress("UnstableApiUsage", "UnstableApiUsage", "UnstableApiUsage", "UnstableApiUsage")
+@file:Suppress("UnstableApiUsage")
 
 pluginManagement {
     repositories {
@@ -23,4 +23,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Dicoding Tales"
 include(":app")
- 
