@@ -93,7 +93,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    private fun truncateSnippet(snippet: String, maxLength: Int): String {
+    private fun truncateSnippet(snippet: String): String {
+        val maxLength = 40
         return if (snippet.length > maxLength) {
             snippet.take(maxLength) + "..."
         } else {
@@ -112,9 +113,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (lat != null && lon != null) {
                     val latLng = LatLng(lat, lon)
 
-                    val truncatedSnippet = story.description?.let {
-                        truncateSnippet(it, maxLength = 40)
-                    } ?: ""
+                    val truncatedSnippet = truncateSnippet(story.description)
 
                     gMaps.addMarker(
                         MarkerOptions()

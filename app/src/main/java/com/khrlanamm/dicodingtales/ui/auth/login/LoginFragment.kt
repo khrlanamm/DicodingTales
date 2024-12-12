@@ -2,6 +2,8 @@ package com.khrlanamm.dicodingtales.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,6 +95,10 @@ class LoginFragment : Fragment() {
 
         dialog.setOnDismissListener {
             navigateToMainActivity()
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                navigateToMainActivity()
+            }, 100)
         }
         dialog.show()
     }
