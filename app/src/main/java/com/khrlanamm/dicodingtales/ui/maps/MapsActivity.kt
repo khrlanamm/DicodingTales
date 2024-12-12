@@ -105,7 +105,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun addManyMarker(stories: List<StoryEntity>) {
         if (::gMaps.isInitialized) {
             val boundsBuilder = LatLngBounds.builder()
-            val markerIcon = BitmapDescriptorFactory.fromResource(R.drawable.bangkit_mini)
+            val markerIcon = BitmapDescriptorFactory.fromResource(R.mipmap.bangkit_mini)
 
             stories.forEach { story ->
                 val lat = story.lat
