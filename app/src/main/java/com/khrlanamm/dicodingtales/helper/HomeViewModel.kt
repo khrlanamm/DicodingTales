@@ -18,7 +18,9 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         return repository.getStoriesPagingWithMediator(token)
             .cachedIn(viewModelScope)
             .also {
-                _isLoading.value = false
+                it.observeForever { _ ->
+                    _isLoading.value = false
+                }
             }
     }
 }

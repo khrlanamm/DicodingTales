@@ -1,5 +1,6 @@
 package com.khrlanamm.dicodingtales.data
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -20,19 +21,31 @@ class StoryRemoteMediator(
         loadType: LoadType,
         state: PagingState<Int, StoryEntity>
     ): MediatorResult {
-        val page = when (loadType) {
-            LoadType.REFRESH -> INITIAL_PAGE_INDEX
-            LoadType.PREPEND -> {
-                val remoteKeys = getLastRemoteKey(state)
-                remoteKeys?.prevKey ?: return MediatorResult.Success(endOfPaginationReached = true)
-            }
-            LoadType.APPEND -> {
-                val remoteKeys = getLastRemoteKey(state)
-                remoteKeys?.nextKey ?: return MediatorResult.Success(endOfPaginationReached = true)
-            }
-        }
+        try {
+            Log.d("RemoteMediator", "Load initiated with loadType: $loadType")
 
-        return try {
+            val page = when (loadType) {
+                LoadType.REFRESH -> {
+                    Log.d("RemoteMediator", "LoadType.REFRESH triggered")
+                    INITIAL_PAGE_INDEX
+                }
+                LoadType.PREPEND -> {
+                    Log.d("RemoteMediator", "LoadType.PREPEND triggered")
+                    val remoteKeys = getLastRemoteKey(state)
+                    val prevKey = remoteKeys?.prevKey
+                    Log.d("RemoteMediator", "PREPEND prevKey: $prevKey")
+                    prevKey ?: return MediatorResult.Success(endOfPaginationReached = true)
+                }
+                LoadType.APPEND -> {
+                    Log.d("RemoteMediator", "LoadType.APPEND triggered")
+                    val remoteKeys = getLastRemoteKey(state)
+                    val nextKey = remoteKeys?.nextKey
+                    Log.d("RemoteMediator", "APPEND nextKey: $nextKey")
+                    nextKey ?: return MediatorResult.Success(endOfPaginationReached = true)
+                }
+            }
+
+            Log.d("RemoteMediator", "Fetching data from API: page = $page, pageSize = ${state.config.pageSize}")
             val response = apiService.getStories("Bearer $token", page, state.config.pageSize)
             val stories = response.listStory.map {
                 StoryEntity(
@@ -47,6 +60,8 @@ class StoryRemoteMediator(
             }
 
             val endOfPaginationReached = stories.isEmpty()
+            Log.d("RemoteMediator", "Data fetched: ${stories.size} stories, endOfPaginationReached: $endOfPaginationReached")
+
             val keys = stories.map {
                 RemoteKeys(
                     storyId = it.id,
@@ -54,27 +69,37 @@ class StoryRemoteMediator(
                     nextKey = if (endOfPaginationReached) null else page + 1
                 )
             }
+            Log.d("RemoteMediator", "Generated RemoteKeys: $keys")
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
+                    Log.d("RemoteMediator", "Clearing old data for REFRESH")
                     database.remoteKeysDao().clearRemoteKeys()
                     database.storyDao().clearAllStories()
                 }
+
+                Log.d("RemoteMediator", "Inserting new data into database")
                 database.remoteKeysDao().insertKeys(keys)
+                Log.d("RemoteMediator", "Inserted RemoteKeys: $keys")
                 database.storyDao().insertStories(stories)
             }
 
-            MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
+            Log.d("RemoteMediator", "Load completed successfully for page: $page")
+            return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (e: Exception) {
-            MediatorResult.Error(e)
+            Log.e("RemoteMediator", "Error during load: ${e.message}", e)
+            return MediatorResult.Error(e)
         }
     }
 
     private suspend fun getLastRemoteKey(state: PagingState<Int, StoryEntity>): RemoteKeys? {
-        return state.pages
-            .lastOrNull { it.data.isNotEmpty() }
-            ?.data?.lastOrNull()
-            ?.let { story -> database.remoteKeysDao().getRemoteKeys(story.id) }
+        val lastPage = state.pages.lastOrNull { it.data.isNotEmpty() }
+        val lastStory = lastPage?.data?.lastOrNull()
+        val remoteKeys = lastStory?.let { story ->
+            database.remoteKeysDao().getRemoteKeys(story.id)
+        }
+        Log.d("RemoteMediator", "getLastRemoteKey: $remoteKeys for story: $lastStory")
+        return remoteKeys
     }
 
     override suspend fun initialize(): InitializeAction {
