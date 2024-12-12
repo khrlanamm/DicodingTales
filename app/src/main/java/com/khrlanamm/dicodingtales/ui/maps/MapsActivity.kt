@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,7 +24,6 @@ import com.khrlanamm.dicodingtales.data.Result
 import com.khrlanamm.dicodingtales.data.local.pref.SessionManager
 import com.khrlanamm.dicodingtales.data.remote.response.StoryEntity
 import com.khrlanamm.dicodingtales.databinding.ActivityMapsBinding
-import kotlinx.coroutines.launch
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -158,8 +156,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mapsViewModel.getAllStoriesWithMap(it)
         }
     }
-
-
 
 
     private fun setMapStyle() {

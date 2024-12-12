@@ -93,4 +93,5 @@ dependencies {
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
     testImplementation(libs.androidx.core.testing)
+    testImplementation("org.robolectric:robolectric:4.10.3")
 }

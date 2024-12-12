@@ -13,7 +13,6 @@ import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
-import androidx.lifecycle.viewModelScope
 
 class Repository private constructor(
     private val apiService: ApiService,
